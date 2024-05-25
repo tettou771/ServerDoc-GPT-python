@@ -1,11 +1,16 @@
 import json
+import os
 from utils.health_check import HealthCheck
 from utils.gpt_client import GPTClient
 from utils.email_sender import EmailSender
 
 def main():
+    # Get the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # Load config
-    with open('config.json', 'r') as f:
+    config_path = os.path.join(script_dir, 'config.json')
+    with open(config_path, 'r') as f:
         config = json.load(f)
 
     email = config['email']
