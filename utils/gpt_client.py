@@ -42,11 +42,12 @@ class GPTClient:
             return parsed_response
 
         except json.JSONDecodeError:
+            print(gpt_answer)
             return {"error": "Response is not valid JSON"}
 
     def generate_image(self, prompt):
         response = self.client.images.generate(
             prompt=prompt,
-            size = '512x512'
+            size = '256x256'
         )
         return response.data[0].url
