@@ -1,0 +1,50 @@
+{
+    "email": "your@email.com",
+    "gpt_model": "gpt-4",
+    "openai_api_key": "your-api-key",
+    "smtp": {
+        "server": "smtp.server.address",
+        "port": 587,
+        "from_email": "from_email",
+        "password": "password"
+    },
+    "commands": {
+        "Current time": {
+            "command": "date",
+            "description": "Get current date and time."
+        },
+        "System uptime": {
+            "command": "uptime",
+            "description": "Displays how long the system has been running and the load average."
+        },
+        "CPU usage": {
+            "command": "mpstat",
+            "description": "Reports detailed CPU usage statistics."
+        },
+        "Top processes": {
+            "command": "top -n 1 -b | head -n 20",
+            "description": "Displays the top processes by CPU usage. If you find a problem, please write process name with pid."
+        },
+        "Disk usage": {
+            "command": "df -h",
+            "description": "Displays the disk usage for all files and directories in the root directory."
+        },
+        "Memory usage": {
+            "command": "free",
+            "description": "Check memory usage."
+        },
+        "Virtual memory statistics": {
+            "command": "vmstat",
+            "description": "Provides virtual memory statistics including disk IO, system activity, and CPU activity."
+        },
+        "IO statistics": {
+            "command": "iostat | grep -v loop",
+            "description": "Displays CPU statistics and IO statistics for disks, excluding loop devices."
+        },
+        "Recent Kernel messages": {
+            "command": "dmesg -T | tail -30",
+            "description": "Displays messages from the kernel, including hardware errors, driver messages, and system errors."
+        }
+    },
+    "prompt": "あなたはサーバー管理者です。サーバの健康状態について日本語でレポートして、オーナーが対応するべきことがあれば教えてください。メールで応答に関して受信するので、JSON形式で、subjectキーにタイトル、bodyキーに本文、dall-e_promptキーに、この状況を説明するためのイラストや図解（写真ではない）生成用のプロンプトをstring形式で入れていください。タイトルは、問題がない場合は PASSED: で開始して、調べたほうがいいことがある時は WARNING: で始まり、至急確認するべき状況なら ERROR: をつけてください。本文はmarkdown形式でお願いします"
+}
