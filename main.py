@@ -13,6 +13,7 @@ def main():
     with open(config_path, 'r') as f:
         config = json.load(f)
 
+    server_name = config['server_name']
     email = config['email']
     smtp_config = config['smtp']
     gpt_model = config['gpt_model']
@@ -41,7 +42,7 @@ def main():
 
     # Send the report via email
     email_sender = EmailSender(smtp_config)
-    email_sender.send_report(email, gpt_response['subject'], gpt_response['body'], gpt_response['image_url'])
+    email_sender.send_report(server_name, email, gpt_response['subject'], gpt_response['body'], gpt_response['image_url'], report)
 
 if __name__ == '__main__':
     main()

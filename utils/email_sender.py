@@ -12,11 +12,11 @@ class EmailSender:
         self.from_email = smtp_config['from_email']
         self.password = smtp_config['password']
 
-    def send_report(self, to_email, subject, body, image_url):
+    def send_report(self, server_name, to_email, subject, body, image_url, report):
         msg = MIMEMultipart()
         msg["From"] = self.from_email
         msg["To"] = to_email
-        msg["Subject"] = subject
+        msg["Subject"] = server_name + ' ' + subject
 
         # Markdown本文をHTMLに変換
         body_html = markdown.markdown(body)
@@ -25,8 +25,13 @@ class EmailSender:
         html = f"""
         <html>
         <body>
-            <img src="cid:image1"><br>
+            <img src="cid:image1">
+            <br>
             {body_html}
+            <br>
+            <pre><code>
+            {report}
+            </pre></code>
         </body>
         </html>
         """
