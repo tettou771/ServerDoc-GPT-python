@@ -24,6 +24,16 @@ class EmailSender:
         # HTMLパートの作成
         html = f"""
         <html>
+        <head>
+        <style>
+            pre {{
+                background-color: #333333; /* 暗めの灰色 */
+                color: #ffffff; /* 白 */
+                padding: 10px;
+                border-radius: 5px;
+            }}
+        </style>
+        </head>
         <body>
             <img src="cid:image1">
             <br>
