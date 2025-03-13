@@ -1,7 +1,7 @@
 {
     "server_name": "your server name",
     "email": "your@email.com",
-    "gpt_model": "gpt-4",
+    "gpt_model": "o1-mini",
     "openai_api_key": "your-api-key",
     "smtp": {
         "server": "smtp.server.address",
@@ -21,6 +21,10 @@
         "CPU usage": {
             "command": "mpstat",
             "description": "Reports detailed CPU usage statistics."
+        },
+        "CPU temp": {
+            "command": "sensors",
+            "description": "Get CPU temperature (lm-sensors)."
         },
         "Top processes": {
             "command": "top -n 1 -b | head -n 20",
@@ -45,7 +49,11 @@
         "Recent Kernel messages": {
             "command": "dmesg -T | tail -30",
             "description": "Displays messages from the kernel, including hardware errors, driver messages, and system errors."
+        },
+        "SMART all sdX": {
+            "command": "for DISK in /dev/sd?; do if [ -b \"$DISK\" ]; then echo \"==== $DISK ====\"; sudo smartctl -H \"$DISK\"; fi; done",
+            "description": "Check S.M.A.R.T health for all attached sdX devices (sda, sdb, sdc, ...)."
         }
     },
-    "prompt": "あなたはサーバー管理者です。サーバの健康状態について日本語でレポートして、簡潔なサマリー（冒頭に結論がある）と、オーナーが対応するべ>きことがあれば教えてください。500文字以内でお願いします。メールで応答に関して受信するので、JSON形式で、subjectキーにタイトル、bodyキーに本文、dall-e_promptキーに、元気度・深刻度に応じてサーバーの表情が変化するdigital drawing生成用のプロンプト(なぜか猫もいる)をstring形式で入れていください。タイトルは、問題がない場合は PASSED: で開始して、調べたほうがいいことがある時は WARNING: で始まり、至急確認するべき状況なら ERROR: をつけてください。本文はmarkdown形式でお願いします"
+    "prompt": "あなたはサーバー管理者です。サーバの健康状態について日本語でレポートして、簡潔なサマリー（冒頭に結論がある）と、オーナーが対応するべきことがあれば教えてください。500文字以内でお願いします。メールで応答に関して受信するので、JSON形式で、subjectキーにタイトル、bodyキーに本文、dall-e_promptキーに、元気度・深刻度に応じてサーバーの表情が変化するdigital drawing生成用のプロンプト(なぜか猫もいる)をstring形式で入れていください。タイトルは、問題がない場合は PASSED: で開始して、調べたほうがいいことがある時は WARNING: で始まり、至急確認するべき状況なら ERROR: をつけてください。本文はmarkdown形式でお願いします"
 }

@@ -18,6 +18,7 @@ class HealthCheck:
             desc = cmd_info['description']
             output = self.execute_command(cmd)
             report += f"## {title}\n"
-            report += f"## {desc}\n\n"
+            report += f"## {desc}\n"
+            report += f"$ {cmd}\n\n"
             report += f"{output}\n\n"
         return report
